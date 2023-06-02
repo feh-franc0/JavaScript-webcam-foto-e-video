@@ -5,11 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webcam</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            background-color: rgb(23, 20, 27);
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        .divBtnAtivarCamera {
+            display: block;
+        }
+        .btnAtivarCamera {
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 1.5rem;
+            background-color: blue;
+            color: white;
+        }
+        .divCamera {
+            display: none;
+        }
+        .FotoEPreview {
+            /* background-color: blue; */
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            width: 720px;
+            padding: 20px;
+        }
+        .saveImage {
+            background-color: #220e56;
+            text-align: center;
+            border-radius: 8px;
+            border: none;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            margin: 5px 0px;
+        }
+        .buttonFoto {
+            background-color: #220e56;
+            text-align: center;
+            border-radius: 8px;
+            border: none;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            margin: 5px 0px;
+        }
+        .canvasFoto {
+            width: 100px;
+        }
+        .btnDesativarCamera {
+            background-color: #220e56;
+            text-align: center;
+            border-radius: 8px;
+            border: none;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            margin: 5px 0px;
+        }
+        .listaImagens {
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(19 16 22);
+        }
+    </style>
 </head>
 <body>
-    <video autoplay></video>
-    <canvas></canvas>
-    <button>Tirar foto</button>
-    <script src="./script.js"></script>
+    <div class="container">
+        <div class="divBtnAtivarCamera">
+            <button class="btnAtivarCamera">Ativar Câmera</button>
+        </div>
+        <div class="divCamera">
+            <div class="FotoEPreview">
+                <button class="btnDesativarCamera">Fechar Câmera</button>
+                <video class='videoFoto' autoplay></video>
+                <div class="listaImagens">
+                    <!-- <canvas class='canvasFoto' ></canvas> -->
+                </div>
+                <button class='buttonFoto' >Tirar foto</button>
+            </div>
+            <script src="./script.js"></script>
+        </div>
+    </div>
 </body>
 </html>

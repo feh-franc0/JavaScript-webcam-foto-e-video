@@ -1,23 +1,53 @@
-var video = document.querySelector('video');
+let videoStream;
+var divCamera = document.querySelector(".divCamera");
+var divBtnAtivarCamera = document.querySelector(".divBtnAtivarCamera");
+var video = document.querySelector(".videoFoto");
+var FotoEPreview = document.querySelector(".FotoEPreview");
+var ListaImagens = document.querySelector(".listaImagens");
 
-navigator.mediaDevices.getUserMedia({video:true})
-.then(stream => {
-    video.srcObject = stream;
-    video.play();
-})
-.catch(error => {
-    console.log(error);
-})
 
-document.querySelector('button').addEventListener('click', () => {
-    var canvas = document.querySelector('canvas');
+document.querySelector(".btnAtivarCamera").addEventListener("click", () => {
+    divCamera.style.display = 'block'
+    divBtnAtivarCamera.style.display = 'none'
+
+    navigator.mediaDevices
+    .getUserMedia({ video: true })
+    .then((stream) => {
+        videoStream = stream;
+        video.srcObject = stream;
+        video.play();
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+});
+
+document.querySelector(".buttonFoto").addEventListener("click", () => {
+    var canvas = document.createElement('canvas');
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
-    var context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0);
+    canvas.className = 'canvasFoto'
+    console.log(canvas.height, canvas.width)
+    var newContext = canvas.getContext('2d');
+
+    newContext.drawImage(video, 0, 0);
+
+    ListaImagens.appendChild(canvas);
+
     var link = document.createElement('a');
     link.download = 'foto.png';
     link.href = canvas.toDataURL();
+    console.log("href: ", link.href)
     link.textContent = 'Clique para baixar a imagem';
-    document.body.appendChild(link);
+    FotoEPreview.appendChild(link);
+});
+
+
+document.querySelector(".btnDesativarCamera").addEventListener("click", () => {
+    if (videoStream) {
+        videoStream.getTracks().forEach(track => track.stop());
+    }
+    
+    divCamera.style.display = 'none'
+    divBtnAtivarCamera.style.display = 'block'
 });
