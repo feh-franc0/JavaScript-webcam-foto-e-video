@@ -1,4 +1,5 @@
 let videoStream;
+let temFoto = false;
 var divCamera = document.querySelector(".divCamera");
 var divBtnAtivarCamera = document.querySelector(".divBtnAtivarCamera");
 var video = document.querySelector(".videoFoto");
@@ -27,7 +28,7 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
     canvas.className = 'canvasFoto'
-    console.log(canvas.height, canvas.width)
+    // console.log(canvas.height, canvas.width)
     var newContext = canvas.getContext('2d');
 
     newContext.drawImage(video, 0, 0);
@@ -37,9 +38,15 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
     var link = document.createElement('a');
     link.download = 'foto.png';
     link.href = canvas.toDataURL();
-    console.log("href: ", link.href)
+    // console.log("href: ", link.href)
+
     link.textContent = 'Clique para baixar a imagem';
+    // link.appendChild(canvas);
+
     FotoEPreview.appendChild(link);
+    // ListaImagens.appendChild(link);
+    
+    temFoto = true
 });
 
 
@@ -51,3 +58,10 @@ document.querySelector(".btnDesativarCamera").addEventListener("click", () => {
     divCamera.style.display = 'none'
     divBtnAtivarCamera.style.display = 'block'
 });
+
+document.querySelector(".canvasFoto").addEventListener("click", () => {
+    console.log('cliqcou')
+})
+
+
+document.querySelector(".listaImagens").children
