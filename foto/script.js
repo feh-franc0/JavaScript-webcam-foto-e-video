@@ -4,6 +4,8 @@ var divBtnAtivarCamera = document.querySelector(".divBtnAtivarCamera");
 var video = document.querySelector(".videoFoto");
 var FotoEPreview = document.querySelector(".FotoEPreview");
 var ListaImagens = document.querySelector(".listaImagens");
+var listLenght = ListaImagens.childElementCount
+var canvasFotos = document.querySelectorAll(".containerCanvas")
 
 
 document.querySelector(".btnAtivarCamera").addEventListener("click", () => {
@@ -22,28 +24,49 @@ document.querySelector(".btnAtivarCamera").addEventListener("click", () => {
     });
 });
 
+function actionClickContCanvas (event) {
+    console.log("--- actionClickContCanvas ---")
+    var canvasFoto = event.target;
+    console.log("canvasFoto: ",canvasFoto)
+}
+
 document.querySelector(".buttonFoto").addEventListener("click", () => {
     var canvas = document.createElement('canvas');
+    var ContainerCanvas = document.createElement('div');
 
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
+    
     canvas.className = 'canvasFoto'
+    ContainerCanvas.className = 'containerCanvas'
+
     var newContext = canvas.getContext('2d');
     newContext.drawImage(video, 0, 0);
 
-    ListaImagens.appendChild(canvas);
+    ContainerCanvas.appendChild(canvas);
+    ListaImagens.appendChild(ContainerCanvas);
 
     var link = document.createElement('a');
     link.download = 'foto.png';
     link.href = canvas.toDataURL();
 
-    // link.textContent = 'Clique para baixar a imagem';
-    link.appendChild(canvas);
+    // console.log("toDataURL(): ", link.href)
 
-    // FotoEPreview.appendChild(link);
-    ListaImagens.appendChild(link);
+    link.textContent = 'baixar a imagem';
+    // link.appendChild(canvas);
+
+    FotoEPreview.appendChild(link);
+    // ListaImagens.appendChild(link);
+
+    
+    canvasFotos = document.querySelectorAll(".containerCanvas")
+    // console.log(canvasFotos)
+    
+
+    for (var i = 0; i < canvasFotos.length; i++) {
+        canvasFotos[i].addEventListener('click', actionClickContCanvas);
+    }
 });
-
 
 document.querySelector(".btnDesativarCamera").addEventListener("click", () => {
     if (videoStream) {

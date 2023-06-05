@@ -103,6 +103,10 @@
             scrollbar-width: thin; /* Largura do scroll para navegadores não-WebKit */
             scrollbar-color: #888 #f1f1f1; /* Cor do thumb e track para navegadores não-WebKit */
         }
+
+        .canvasFoto:hover {
+            border: 2px solid #613cbe;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +120,16 @@
                 <video class='videoFoto' autoplay></video>
                 <div class="listaImagens">
                     <!-- <canvas class='canvasFoto' ></canvas> -->
+                    
+                    <!-- <div class="containerCanvas">
+                        <canvas height="480" width="640" class="canvasFoto"></canvas>
+                    </div>
+                    <div class="containerCanvas">
+                        <canvas height="480" width="640" class="canvasFoto"></canvas>
+                    </div>
+                    <div class="containerCanvas">
+                        <canvas height="480" width="640" class="canvasFoto"></canvas>
+                    </div> -->
                 </div>
                 <button class='buttonFoto' >Tirar foto</button>
             </div>
