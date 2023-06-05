@@ -107,6 +107,21 @@
         .canvasFoto:hover {
             border: 2px solid #613cbe;
         }
+        .close-icon {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            color: #fff;
+            padding: 5px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        .containerCanvas {
+            position: relative;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -121,10 +136,11 @@
                 <div class="listaImagens">
                     <!-- <canvas class='canvasFoto' ></canvas> -->
                     
-                    <!-- <div class="containerCanvas">
+                    <div class="containerCanvas">
+                        <div class="close-icon">❌</div>
                         <canvas height="480" width="640" class="canvasFoto"></canvas>
                     </div>
-                    <div class="containerCanvas">
+                    <!-- <div class="containerCanvas">
                         <canvas height="480" width="640" class="canvasFoto"></canvas>
                     </div>
                     <div class="containerCanvas">
