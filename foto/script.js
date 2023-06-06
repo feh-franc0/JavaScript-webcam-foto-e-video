@@ -4,96 +4,158 @@ var divBtnAtivarCamera = document.querySelector(".divBtnAtivarCamera");
 var video = document.querySelector(".videoFoto");
 var FotoEPreview = document.querySelector(".FotoEPreview");
 var ListaImagens = document.querySelector(".listaImagens");
-var listLenght = ListaImagens.childElementCount
-var canvasFotos = document.querySelectorAll(".containerCanvas")
+var canvasFotos = document.querySelectorAll(".containerCanvas");
 
+//* Criação do array vazio
+let arrayObjetos = [];
 
+let num = 0
+
+// ? Ativa a camera
 document.querySelector(".btnAtivarCamera").addEventListener("click", () => {
-    divCamera.style.display = 'block'
-    divBtnAtivarCamera.style.display = 'none'
+  divCamera.style.display = "block";
+  divBtnAtivarCamera.style.display = "none";
 
-    navigator.mediaDevices
+  navigator.mediaDevices
     .getUserMedia({ video: true })
     .then((stream) => {
-        videoStream = stream;
-        video.srcObject = stream;
-        video.play();
+      videoStream = stream;
+      video.srcObject = stream;
+      video.play();
     })
     .catch((error) => {
-        console.log(error);
+      console.log(error);
     });
 });
 
-function actionClickContCanvas (event) {
-    console.log("--- actionClickContCanvas ---")
-    var canvasFoto = event.target;
-    console.log("canvasFoto: ",canvasFoto)
+//* Função para remover um item pelo valor da chave
+function removerItem(chave) {
+  // Filtra o array em busca do objeto com a chave fornecida
+  arrayObjetos = arrayObjetos.filter((objeto) => !objeto.hasOwnProperty(chave));
 }
 
+// ? ao clicar na imagem:
+function actionClickContCanvas(event) {
+  console.log("--- actionClickContCanvas ---");
+  var canvasFoto = event.target;
+
+  let classAndKey = canvasFoto.className.split(" ");
+  console.log(classAndKey);
+
+  //! Deleta elemento.
+  document
+    .querySelector(`.${classAndKey[1]}`)
+    .parentElement.parentElement.remove();
+
+  if (classAndKey[0] === "delete") {
+    removerItem(classAndKey[1]);
+    console.log(arrayObjetos);
+  } else {
+    console.log("elemento nao reconhecido");
+  }
+
+  console.log(arrayObjetos);
+}
+
+//* Função para adicionar um objeto com chave e valor ao array
+function adicionarItem(chave, valor) {
+  // Criação do objeto
+  let objeto = {};
+  objeto[chave] = valor;
+
+  // Adiciona o objeto ao array
+  arrayObjetos.push(objeto);
+}
+
+// ? cria as imagens de preview de cada imagem e seus botoes de actions
 document.querySelector(".buttonFoto").addEventListener("click", () => {
-    var canvas = document.createElement('canvas');
-    var ContainerCanvas = document.createElement('div');
+  var canvas = document.createElement("canvas");
+  var ContainerCanvas = document.createElement("div");
 
-    var delFoto = document.createElement('div');
-    var saveFoto = document.createElement('div');
+  var delFoto = document.createElement("div");
+  var saveFoto = document.createElement("div");
 
-    var delFotoIcon = document.createElement('img');
-    var saveFotoIcon = document.createElement('img');
-    
-    delFotoIcon.src = './img/delete.png'
-    saveFotoIcon.src = './img/download.png'
+  var delFotoIcon = document.createElement("img");
+  var saveFotoIcon = document.createElement("img");
 
-    canvas.height = video.videoHeight;
-    canvas.width = video.videoWidth;
-    
-    canvas.className = 'canvasFoto'
-    ContainerCanvas.className = 'containerCanvas'
-    
-    delFoto.className = 'del-icon'
-    delFoto.appendChild(delFotoIcon);
-    
-    saveFoto.className = 'save-icon'
-    saveFoto.appendChild(saveFotoIcon);
-    
-    var newContext = canvas.getContext('2d');
-    newContext.drawImage(video, 0, 0);
+  delFotoIcon.src = "./img/delete.png";
+  // let valueEl = ListaImagens.childElementCount
+  let valueEl = num
+  num++
+  console.log("valueEl: ", valueEl)
+  delFotoIcon.className = `delete delete${valueEl}`;
 
-    // link.textContent = 'Clique para baixar a imagem';
+  saveFotoIcon.src = "./img/download.png";
 
-    var link = document.createElement('a');
-    link.download = 'foto.png';
-    link.href = canvas.toDataURL();
+  canvas.height = video.videoHeight;
+  canvas.width = video.videoWidth;
 
-    // console.log("toDataURL(): ", link.href)
+  canvas.className = "canvasFoto";
+  ContainerCanvas.className = "containerCanvas";
 
-    // link.textContent = 'baixar a imagem';
-    // link.appendChild(canvas);
-    link.appendChild(saveFoto);
+  delFoto.className = "del-icon";
+  delFoto.appendChild(delFotoIcon);
 
-    // FotoEPreview.appendChild(link);
-    // ListaImagens.appendChild(link);
+  saveFoto.className = "save-icon";
+  saveFoto.appendChild(saveFotoIcon);
 
-    
-    ContainerCanvas.appendChild(delFoto);
-    ContainerCanvas.appendChild(link);
-    ContainerCanvas.appendChild(canvas);
-    ListaImagens.appendChild(ContainerCanvas);
+  var newContext = canvas.getContext("2d");
+  newContext.drawImage(video, 0, 0);
 
-    
-    canvasFotos = document.querySelectorAll(".containerCanvas")
-    // console.log(canvasFotos)
-    
+  // link.textContent = 'Clique para baixar a imagem';
 
-    for (var i = 0; i < canvasFotos.length; i++) {
-        canvasFotos[i].addEventListener('click', actionClickContCanvas);
-    }
+  var link = document.createElement("a");
+  link.download = "foto.png";
+  link.href = canvas.toDataURL();
+
+  // console.log("toDataURL(): ", link.href)
+
+  // link.textContent = 'baixar a imagem';
+  // link.appendChild(canvas);
+  link.appendChild(saveFoto);
+
+  // FotoEPreview.appendChild(link);
+  // ListaImagens.appendChild(link);
+
+  ContainerCanvas.appendChild(delFoto);
+  ContainerCanvas.appendChild(link);
+  ContainerCanvas.appendChild(canvas);
+  ListaImagens.appendChild(ContainerCanvas);
+
+  let chave = `delete${valueEl}`;
+
+  // console.log(`chave: ${chave} & valor: ${canvas.toDataURL()}`)
+  adicionarItem(chave, canvas.toDataURL());
+  console.log(arrayObjetos);
+
+  canvasFotos = document.querySelectorAll(".containerCanvas");
+  // console.log(canvasFotos)
+
+  for (var i = 0; i < canvasFotos.length; i++) {
+    canvasFotos[i].addEventListener("click", actionClickContCanvas);
+  }
 });
 
+// ? Desativar camera
 document.querySelector(".btnDesativarCamera").addEventListener("click", () => {
-    if (videoStream) {
-        videoStream.getTracks().forEach(track => track.stop());
-    }
-    
-    divCamera.style.display = 'none'
-    divBtnAtivarCamera.style.display = 'block'
+  if (videoStream) {
+    videoStream.getTracks().forEach((track) => track.stop());
+  }
+
+  divCamera.style.display = "none";
+  divBtnAtivarCamera.style.display = "block";
 });
+
+// TODO: objeto adicionar & remover
+
+// // Adiciona alguns itens ao array
+// adicionarItem("chave1", "valor1");
+// adicionarItem("chave2", "valor2");
+// adicionarItem("chave3", "valor3");
+
+// console.log(arrayObjetos); // Exibe o array de objetos
+
+// // Remove um item pelo valor da chave
+// removerItem("chave2");
+
+// console.log(arrayObjetos); // Exibe o array de objetos atualizado
