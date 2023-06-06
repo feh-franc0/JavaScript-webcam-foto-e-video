@@ -23,12 +23,15 @@
             display: block;
         }
         .btnAtivarCamera {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
             border: none;
-            border-radius: 8px;
             padding: 10px;
             font-size: 1.5rem;
             background-color: blue;
             color: white;
+            cursor: pointer;
         }
         .divCamera {
             display: none;
@@ -107,14 +110,17 @@
         .canvasFoto:hover {
             border: 2px solid #613cbe;
         }
-        .close-icon {
+        .del-icon {
             position: absolute;
-            top: 7px;
-            right: 7px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            color: #fff;
-            padding: 5px;
+            top: 10px;
+            right: 9px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        .save-icon {
+            position: absolute;
+            top: 10px;
+            right: 30px;
             font-size: 10px;
             cursor: pointer;
         }
@@ -127,7 +133,9 @@
 <body>
     <div class="container">
         <div class="divBtnAtivarCamera">
-            <button class="btnAtivarCamera">Ativar Câmera</button>
+            <button class="btnAtivarCamera">
+                <img src="./camera.png" alt="" style="width: 80%; height: 80%;">
+            </button>
         </div>
         <div class="divCamera">
             <div class="FotoEPreview">
@@ -137,7 +145,9 @@
                     <!-- <canvas class='canvasFoto' ></canvas> -->
                     
                     <div class="containerCanvas">
-                        <div class="close-icon">❌</div>
+                        <div class="del-icon"><img src="./img/delete.png" alt=""></div>
+                        <div class="save-icon"><img src="./img/download.png" alt=""></div>
+                        <!-- <div class="del-icon"></div> -->
                         <canvas height="480" width="640" class="canvasFoto"></canvas>
                     </div>
                     <!-- <div class="containerCanvas">

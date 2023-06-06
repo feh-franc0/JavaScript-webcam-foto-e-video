@@ -32,23 +32,34 @@ function actionClickContCanvas (event) {
 
 document.querySelector(".buttonFoto").addEventListener("click", () => {
     var canvas = document.createElement('canvas');
-    var delFoto = document.createElement('div');
     var ContainerCanvas = document.createElement('div');
+
+    var delFoto = document.createElement('div');
+    var saveFoto = document.createElement('div');
+
+    var delFotoIcon = document.createElement('img');
+    var saveFotoIcon = document.createElement('img');
     
+    delFotoIcon.src = './img/delete.png'
+    saveFotoIcon.src = './img/download.png'
 
     canvas.height = video.videoHeight;
     canvas.width = video.videoWidth;
     
     canvas.className = 'canvasFoto'
     ContainerCanvas.className = 'containerCanvas'
-    delFoto.className = 'close-icon'
     
-    delFoto.textContent = '❌';
+    delFoto.className = 'del-icon'
+    delFoto.appendChild(delFotoIcon);
+    
+    saveFoto.className = 'save-icon'
+    saveFoto.appendChild(saveFotoIcon);
     
     var newContext = canvas.getContext('2d');
     newContext.drawImage(video, 0, 0);
 
     ContainerCanvas.appendChild(delFoto);
+    ContainerCanvas.appendChild(saveFoto);
     ContainerCanvas.appendChild(canvas);
     // link.textContent = 'Clique para baixar a imagem';
     ListaImagens.appendChild(ContainerCanvas);
