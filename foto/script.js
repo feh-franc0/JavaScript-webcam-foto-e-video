@@ -58,11 +58,7 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
     var newContext = canvas.getContext('2d');
     newContext.drawImage(video, 0, 0);
 
-    ContainerCanvas.appendChild(delFoto);
-    ContainerCanvas.appendChild(saveFoto);
-    ContainerCanvas.appendChild(canvas);
     // link.textContent = 'Clique para baixar a imagem';
-    ListaImagens.appendChild(ContainerCanvas);
 
     var link = document.createElement('a');
     link.download = 'foto.png';
@@ -70,11 +66,18 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
 
     // console.log("toDataURL(): ", link.href)
 
-    link.textContent = 'baixar a imagem';
+    // link.textContent = 'baixar a imagem';
     // link.appendChild(canvas);
+    link.appendChild(saveFoto);
 
-    FotoEPreview.appendChild(link);
+    // FotoEPreview.appendChild(link);
     // ListaImagens.appendChild(link);
+
+    
+    ContainerCanvas.appendChild(delFoto);
+    ContainerCanvas.appendChild(link);
+    ContainerCanvas.appendChild(canvas);
+    ListaImagens.appendChild(ContainerCanvas);
 
     
     canvasFotos = document.querySelectorAll(".containerCanvas")
