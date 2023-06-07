@@ -38,16 +38,19 @@ function removerItem(chave) {
 function actionClickContCanvas(event) {
   console.log("--- actionClickContCanvas ---");
   var canvasFoto = event.target;
+  console.log(canvasFoto.toDataURL())
 
   let classAndKey = canvasFoto.className.split(" ");
   console.log(classAndKey);
 
-  //! Deleta elemento.
-  document
+
+  if (classAndKey[0] === "delete") {
+    
+    //! Deleta elemento.
+    document
     .querySelector(`.${classAndKey[1]}`)
     .parentElement.parentElement.remove();
 
-  if (classAndKey[0] === "delete") {
     removerItem(classAndKey[1]);
     console.log(arrayObjetos);
   } else {
