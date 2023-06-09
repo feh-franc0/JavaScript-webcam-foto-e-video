@@ -38,11 +38,27 @@ function removerItem(chave) {
 function actionClickContCanvas(event) {
   console.log("--- actionClickContCanvas ---");
   var canvasFoto = event.target;
-  console.log(canvasFoto.toDataURL())
+  console.log("database: ", canvasFoto.toDataURL())
 
   let classAndKey = canvasFoto.className.split(" ");
   console.log(classAndKey);
 
+  if (classAndKey[0] === "canvasFoto") {
+    let canvasPreview = document.querySelector(".previewImagemPicture")
+    let ctx = canvasPreview.getContext('2d')
+
+    let image = new Image();
+    image.src = canvasFoto.toDataURL()
+
+    image.onload = function() {
+      canvasPreview.width = video.videoWidth
+      canvasPreview.height = video.videoHeight
+      ctx.drawImage(image, 0, 0);
+    }
+
+    document.querySelector(".videoFoto").style.display = "none"
+    canvasPreview.style.display = "block"
+  }
 
   if (classAndKey[0] === "delete") {
     
@@ -57,7 +73,7 @@ function actionClickContCanvas(event) {
     console.log("elemento nao reconhecido");
   }
 
-  console.log(arrayObjetos);
+  // console.log(arrayObjetos);
 }
 
 //* Função para adicionar um objeto com chave e valor ao array
@@ -102,6 +118,7 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
   saveFoto.className = "save-icon";
   saveFoto.appendChild(saveFotoIcon);
 
+  console.log("video: ", video)
   var newContext = canvas.getContext("2d");
   newContext.drawImage(video, 0, 0);
 

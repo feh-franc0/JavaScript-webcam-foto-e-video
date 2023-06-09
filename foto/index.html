@@ -140,9 +140,11 @@
         <div class="divCamera">
             <div class="FotoEPreview">
                 <button class="btnDesativarCamera">Fechar Câmera</button>
-                <video class='videoFoto' autoplay></video>
+                <div>
+                    <video class='videoFoto' autoplay style="width: 100%;height: 540px;"></video>
+                    <canvas class="previewImagemPicture" style="width: 100%;height: 540px;display: none;"></canvas>
+                </div>
                 <div class="listaImagens">
-                    <!-- <canvas class='canvasFoto' ></canvas> -->
                     
                     <!-- <div class="containerCanvas">
                         <div class="del-icon"><img src="./img/delete.png" alt=""></div>
