@@ -9,7 +9,7 @@ var canvasFotos = document.querySelectorAll(".containerCanvas");
 //* Criação do array vazio
 let arrayObjetos = [];
 
-let num = 0
+let num = 0;
 
 // ? Ativa a camera
 document.querySelector(".btnAtivarCamera").addEventListener("click", () => {
@@ -34,38 +34,43 @@ function removerItem(chave) {
   arrayObjetos = arrayObjetos.filter((objeto) => !objeto.hasOwnProperty(chave));
 }
 
+document.querySelector(".closePreviewImage").addEventListener("click", () => {
+  document.querySelector(".videoFoto").style.display = "block";
+  document.querySelector(".previewData").style.display = "none";
+});
+
 // ? ao clicar na imagem:
 function actionClickContCanvas(event) {
   console.log("--- actionClickContCanvas ---");
   var canvasFoto = event.target;
-  console.log("database: ", canvasFoto.toDataURL())
+  console.log("database: ", canvasFoto.toDataURL());
 
   let classAndKey = canvasFoto.className.split(" ");
   console.log(classAndKey);
 
   if (classAndKey[0] === "canvasFoto") {
-    let canvasPreview = document.querySelector(".previewImagemPicture")
-    let ctx = canvasPreview.getContext('2d')
+    let canvasPreview = document.querySelector(".previewImagemPicture");
+    let ctx = canvasPreview.getContext("2d");
 
     let image = new Image();
-    image.src = canvasFoto.toDataURL()
+    image.src = canvasFoto.toDataURL();
 
-    image.onload = function() {
-      canvasPreview.width = video.videoWidth
-      canvasPreview.height = video.videoHeight
+    image.onload = function () {
+      canvasPreview.width = video.videoWidth;
+      canvasPreview.height = video.videoHeight;
       ctx.drawImage(image, 0, 0);
-    }
+    };
 
-    document.querySelector(".videoFoto").style.display = "none"
-    canvasPreview.style.display = "block"
+    document.querySelector(".videoFoto").style.display = "none";
+    document.querySelector(".previewData").style.display = "block";
+    // canvasPreview.style.display = "block"
   }
 
   if (classAndKey[0] === "delete") {
-    
     //! Deleta elemento.
     document
-    .querySelector(`.${classAndKey[1]}`)
-    .parentElement.parentElement.remove();
+      .querySelector(`.${classAndKey[1]}`)
+      .parentElement.parentElement.remove();
 
     removerItem(classAndKey[1]);
     console.log(arrayObjetos);
@@ -99,9 +104,9 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
 
   delFotoIcon.src = "./img/delete.png";
   // let valueEl = ListaImagens.childElementCount
-  let valueEl = num
-  num++
-  console.log("valueEl: ", valueEl)
+  let valueEl = num;
+  num++;
+  console.log("valueEl: ", valueEl);
   delFotoIcon.className = `delete delete${valueEl}`;
 
   saveFotoIcon.src = "./img/download.png";
@@ -118,7 +123,7 @@ document.querySelector(".buttonFoto").addEventListener("click", () => {
   saveFoto.className = "save-icon";
   saveFoto.appendChild(saveFotoIcon);
 
-  console.log("video: ", video)
+  console.log("video: ", video);
   var newContext = canvas.getContext("2d");
   newContext.drawImage(video, 0, 0);
 
