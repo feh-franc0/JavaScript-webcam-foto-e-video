@@ -1,7 +1,7 @@
 // Verifica se o navegador suporta a API da mídia
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   // Configurações da gravação
-  const constraints = { video: true };
+  const constraints = { video: true, audio: true };
 
   // Elementos HTML
   const videoElement = document.getElementById('video-preview');
