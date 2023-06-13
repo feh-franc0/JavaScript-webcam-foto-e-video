@@ -43,7 +43,7 @@ document.querySelector(".closePreviewImage").addEventListener("click", () => {
 function actionClickContCanvas(event) {
   console.log("--- actionClickContCanvas ---");
   var canvasFoto = event.target;
-  console.log("database: ", canvasFoto.toDataURL());
+  // console.log("database: ", canvasFoto.toDataURL());
 
   let classAndKey = canvasFoto.className.split(" ");
   console.log(classAndKey);
