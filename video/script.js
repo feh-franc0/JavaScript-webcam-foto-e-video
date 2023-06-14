@@ -16,11 +16,22 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   let countdown;
   let videoData;
 
+  // Formatar segundo para minuto
+  function segundosParaMinutos(segundos) {
+    var minutos = Math.floor(segundos / 60); // Obtém a parte inteira dos minutos
+    var segundosRestantes = segundos % 60; // Obtém os segundos restantes
+  
+    var minutosFormatados = minutos.toString().padStart(2, '0'); // Formata os minutos com 2 dígitos, adicionando zero à esquerda se necessário
+    var segundosFormatados = segundosRestantes.toString().padStart(2, '0'); // Formata os segundos com 2 dígitos, adicionando zero à esquerda se necessário
+  
+    return minutosFormatados + ':' + segundosFormatados;
+  }
+
   // Atualiza o temporizador
   function updateTimer() {
     console.log('remainingTime: ',  remainingTime)
     stopRecordingIfTimeLimit()
-    timerElement.textContent = remainingTime;
+    timerElement.textContent = segundosParaMinutos(remainingTime);
     remainingTime++
   }
 
@@ -66,9 +77,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     }
   }
 
-  // Parar  gravacao com 60 segundos de video
+  // Parar  gravacao com 120 segundos de video
   function stopRecordingIfTimeLimit() {
-    if (remainingTime === 60) {
+    if (remainingTime === 120) {
       mediaRecorder.stop();
       clearInterval(countdown);
       timerElement.textContent = '0';
