@@ -7,6 +7,7 @@
         width: 100%;
         height: auto;
         margin-bottom: 10px;
+        display: none;
       }
       #canvas-preview {
         display: none;
@@ -14,11 +15,17 @@
     </style>
   </head>
   <body>
-    <video id="video-preview" autoplay muted></video>
-    <p>Tempo restante: <span id="timer">2:00</span> segundos</p>
-    <button id="start-button">Iniciar gravação</button>
-    <button id="stop-button" disabled>Parar gravação</button>
-    <video id="recorded-video"></video>
+    <div>
+      <video class='videoFoto' autoplay style="width: 100%;height: 540px;"></video>
+    </div>
+    
+    <div class="containerVideo">
+      <video id="video-preview" autoplay muted></video>
+      <p>Tempo restante: <span id="timer">2:00</span> segundos</p>
+      <button id="start-button">Iniciar gravação</button>
+      <button id="stop-button" disabled>Parar gravação</button>
+      <video id="recorded-video"></video>
+    </div>
 
     <script src="script.js"></script>
   </body>
