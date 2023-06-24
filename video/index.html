@@ -4,19 +4,52 @@
     <title>Gravação de Vídeo</title>
     <style>
       body {
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
       }
-      .containerVideo{
-            display: flex;
-            flex-direction: column;
-            background-color: rgb(23, 20, 27);
-            width: 100vw;
-            height: 100vh;
-            align-items: center;
-            justify-content: center;
-        }
+      .containerVideo {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(23, 20, 27);
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+      .navbar {
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .navbar-title {
+        color: #fff;
+        font-size: 24px;
+        margin: 0;
+        padding-left: 50px;
+      }
+      .navbar-links {
+        display: flex;
+        gap: 10px;
+        padding-right: 50px;
+      }
+      .navbar-link {
+        padding-left: 50px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 6px 10px;
+        border-radius: 4px;
+        background-color: #666;
+        width: 100px;
+        text-align: center;
+      }
       #video-preview {
         width: 100%;
         height: auto;
@@ -31,7 +64,7 @@
         height: 540px;
         background-color: black;
       }
-      .counter-container{
+      .counter-container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -43,12 +76,12 @@
         padding: 5px;
       }
       .dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: red;
-      margin-left: 5px;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: red;
+        margin-left: 5px;
       }
       .dot.blink {
         animation: blink-animation 1s steps(2, start) infinite;
@@ -56,19 +89,19 @@
       .dot.blink.paused {
         animation-play-state: paused;
       }
-      .video-container{
+      .video-container {
         position: relative;
       }
-      .videoRecPreview{
+      .videoRecPreview {
         position: relative;
         display: none;
       }
-      #recorded-video{
+      #recorded-video {
         width: 100%;
         height: 540px;
         background-color: black;
       }
-      .closePreviewRec{
+      .closePreviewRec {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -83,11 +116,11 @@
       }
       .actionsStopStartRecord {
         display: flex;
-        justify-content: space-between;;
+        justify-content: space-between;
       }
       .actionsBtn {
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: #4caf50;
         color: white;
         border: none;
         text-align: center;
@@ -106,8 +139,16 @@
   </head>
   <body>
     <div class="containerVideo">
+      <div class="navbar">
+        <h1 class="navbar-title">Video and Photo</h1>
+        <div class="navbar-links">
+          <a href="/video/index.html" class="navbar-link">Video</a>
+          <a href="/foto/index.html" class="navbar-link">Foto</a>
+        </div>
+      </div>
+
       <div class="video-container">
-        <video class='videoFoto' autoplay></video>
+        <video class="videoFoto" autoplay></video>
         <div class="counter-container">
           <div id="counter">00:00</div>
           <div id="dot" class="dot"></div>
@@ -115,17 +156,16 @@
       </div>
       <div class="videoRecPreview">
         <video id="recorded-video"></video>
-        <div class="closePreviewRec">
-          ❌
-        </div>
+        <div class="closePreviewRec">❌</div>
       </div>
-      
-    
+
       <video id="video-preview" autoplay muted></video>
       <!-- <p>Tempo restante: <span id="timer">2:00</span> segundos</p> -->
       <div class="actionsStopStartRecord">
         <button class="actionsBtn" id="start-button">Iniciar gravação</button>
-        <button class="actionsBtn" id="stop-button" disabled>Parar gravação</button>
+        <button class="actionsBtn" id="stop-button" disabled>
+          Parar gravação
+        </button>
       </div>
     </div>
 

@@ -11,6 +11,39 @@
             margin: 0;
             box-sizing: border-box;
         }
+        .navbar {
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .navbar-title {
+            color: #fff;
+            font-size: 24px;
+            margin: 0;
+            padding-left: 50px;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 10px;
+            padding-right: 50px;
+        }
+        .navbar-link {
+            padding-left: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            background-color: #666;
+            width: 100px;
+            text-align: center;
+        }
         .container {
             display: flex;
             background-color: rgb(23, 20, 27);
@@ -140,6 +173,15 @@
 </head>
 <body>
     <div class="container">
+        
+        <div class="navbar">
+            <h1 class="navbar-title">Video and Photo</h1>
+            <div class="navbar-links">
+            <a href="/video/index.html" class="navbar-link">Video</a>
+            <a href="/foto/index.html" class="navbar-link">Foto</a>
+            </div>
+        </div>
+        
         <div class="divBtnAtivarCamera">
             <button class="btnAtivarCamera">
                 <img src="./img/camera.png" alt="" style="width: 80%; height: 80%;">
