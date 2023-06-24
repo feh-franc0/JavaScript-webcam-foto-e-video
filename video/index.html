@@ -58,10 +58,49 @@
       }
       .video-container{
         position: relative;
-        /* padding-bottom: 56.25%;  */
-        /* Proporção para manter a relação de aspecto do vídeo (16:9) */
-        /* height: 0; */
-        /* overflow: hidden; */
+      }
+      .videoRecPreview{
+        position: relative;
+        display: none;
+      }
+      #recorded-video{
+        width: 100%;
+        height: 540px;
+        background-color: black;
+      }
+      .closePreviewRec{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: black;
+        color: white;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .actionsStopStartRecord {
+        display: flex;
+        justify-content: space-between;;
+      }
+      .actionsBtn {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      @keyframes blink-animation {
+        to {
+          visibility: hidden;
+        }
       }
     </style>
   </head>
@@ -74,14 +113,20 @@
           <div id="dot" class="dot"></div>
         </div>
       </div>
-
+      <div class="videoRecPreview">
+        <video id="recorded-video"></video>
+        <div class="closePreviewRec">
+          ❌
+        </div>
+      </div>
       
-      <video id="recorded-video"></video>
     
       <video id="video-preview" autoplay muted></video>
-      <p>Tempo restante: <span id="timer">2:00</span> segundos</p>
-      <button id="start-button">Iniciar gravação</button>
-      <button id="stop-button" disabled>Parar gravação</button>
+      <!-- <p>Tempo restante: <span id="timer">2:00</span> segundos</p> -->
+      <div class="actionsStopStartRecord">
+        <button class="actionsBtn" id="start-button">Iniciar gravação</button>
+        <button class="actionsBtn" id="stop-button" disabled>Parar gravação</button>
+      </div>
     </div>
 
     <script src="script.js"></script>

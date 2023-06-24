@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
 // Verifica se o navegador suporta a API da mídia
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   // Configurações da gravação
@@ -25,6 +26,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   const startButton = document.getElementById('start-button');
   const stopButton = document.getElementById('stop-button');
   const recordedVideoElement = document.getElementById('recorded-video');
+  const dotElement = document.getElementById("dot");
+  const previewRecord = document.querySelector('.closePreviewRec')
+  const recPreview = document.querySelector(".videoRecPreview")
+  const webCamVideo = document.querySelector(".video-container")
 
   let mediaRecorder;
   let remainingTime;
@@ -56,6 +61,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Obtém acesso à câmera usando a função getUserMedia do objeto navigator.mediaDevices
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function (stream) {
+
+        dotElement.classList.add("blink");
+        dotElement.classList.remove("paused");
+
         // Atribui o objeto de stream retornado à propriedade srcObject do elemento de vídeo
         videoElement.srcObject = stream;
 
@@ -112,28 +121,47 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
       mediaRecorder.stop();
       clearInterval(countdown);
-      timerElement.textContent = '0';
+      timerElement.textContent = '00:00';
       remainingTime = 0
       startButton.disabled = false;
       stopButton.disabled = true;
+
+      dotElement.classList.remove("blink");
+      dotElement.classList.add("paused");
+      recPreview.style.display = "block"
+      webCamVideo.style.display = 'none'
     }
   }
 
   // Parar  gravacao com 120 segundos de video
   function stopRecordingIfTimeLimit() {
+    
     if (remainingTime === 120) {
       mediaRecorder.stop();
       clearInterval(countdown);
-      timerElement.textContent = '0';
+      timerElement.textContent = '00:00';
       remainingTime = 0
       startButton.disabled = false;
       stopButton.disabled = true;
+      
+      dotElement.classList.remove("blink");
+      dotElement.classList.add("paused");
+      recPreview.style.display = "block"
+      webCamVideo.style.display = 'none'
     }
   }
 
   // Event listeners dos botões
   startButton.addEventListener('click', startRecording);
   stopButton.addEventListener('click', stopRecording);
+
+  // Close preview
+  previewRecord.addEventListener('click', () => {
+    console.log("clicou aqui")
+    recPreview.style.display = "none"
+    webCamVideo.style.display = "block"
+  });
+
 } else {
   console.error('O navegador não suporta a API de mídia necessária.');
 }
