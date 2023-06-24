@@ -21,7 +21,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
   // Elementos HTML
   const videoElement = document.getElementById('video-preview');
-  const timerElement = document.getElementById('timer');
+  const timerElement = document.getElementById('counter');
   const startButton = document.getElementById('start-button');
   const stopButton = document.getElementById('stop-button');
   const recordedVideoElement = document.getElementById('recorded-video');

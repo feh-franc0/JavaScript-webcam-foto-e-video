@@ -3,6 +3,20 @@
   <head>
     <title>Gravação de Vídeo</title>
     <style>
+      body {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+      }
+      .containerVideo{
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(23, 20, 27);
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
       #video-preview {
         width: 100%;
         height: auto;
@@ -12,19 +26,62 @@
       #canvas-preview {
         display: none;
       }
+      .videoFoto {
+        width: 100%;
+        height: 540px;
+        background-color: black;
+      }
+      .counter-container{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: black;
+        color: white;
+        padding: 5px;
+      }
+      .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: red;
+      margin-left: 5px;
+      }
+      .dot.blink {
+        animation: blink-animation 1s steps(2, start) infinite;
+      }
+      .dot.blink.paused {
+        animation-play-state: paused;
+      }
+      .video-container{
+        position: relative;
+        /* padding-bottom: 56.25%;  */
+        /* Proporção para manter a relação de aspecto do vídeo (16:9) */
+        /* height: 0; */
+        /* overflow: hidden; */
+      }
     </style>
   </head>
   <body>
-    <div>
-      <video class='videoFoto' autoplay style="width: 100%;height: 540px;"></video>
-    </div>
-    
     <div class="containerVideo">
+      <div class="video-container">
+        <video class='videoFoto' autoplay></video>
+        <div class="counter-container">
+          <div id="counter">00:00</div>
+          <div id="dot" class="dot"></div>
+        </div>
+      </div>
+
+      
+      <video id="recorded-video"></video>
+    
       <video id="video-preview" autoplay muted></video>
       <p>Tempo restante: <span id="timer">2:00</span> segundos</p>
       <button id="start-button">Iniciar gravação</button>
       <button id="stop-button" disabled>Parar gravação</button>
-      <video id="recorded-video"></video>
     </div>
 
     <script src="script.js"></script>
